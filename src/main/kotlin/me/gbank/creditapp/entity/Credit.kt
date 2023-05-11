@@ -7,7 +7,6 @@ import java.time.LocalDate
 import java.util.*
 
 @Entity
-@Table(name = "Credit")
 data class Credit(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null,
     @Column(nullable = false, unique = true) val creditCode: UUID = UUID.randomUUID(),
