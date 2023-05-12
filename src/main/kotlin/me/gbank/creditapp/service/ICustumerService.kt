@@ -1,12 +1,12 @@
 package me.gbank.creditapp.service
 
-import me.gbank.creditapp.entity.Custumer
+import me.gbank.creditapp.entity.Customer
 
-interface ICustumerService {
+interface ICustomerService {
 
-    fun save(custumer: Custumer): Custumer
+    fun save(Customer: Customer): String
 
-    fun findById(id: Long): Custumer
+    fun findById(id: Long): Customer
 
-    fun delete(id: Long): Custumer
+    fun delete(id: Long)
 }

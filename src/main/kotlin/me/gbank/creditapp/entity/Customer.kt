@@ -1,11 +1,10 @@
 package me.gbank.creditapp.entity
 
 import jakarta.persistence.*
-import org.springframework.boot.autoconfigure.web.WebProperties.Resources.Chain.Strategy
 
 @Entity
 @Table(name = "Client")
-data class Custumer(
+data class Customer(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null,
     @Column(nullable = false) var firstName: String = "",
     @Column(nullable = false) var lastName: String = "",
@@ -17,7 +16,7 @@ data class Custumer(
     @OneToMany(
         fetch = FetchType.LAZY,
         cascade = arrayOf(CascadeType.REMOVE, CascadeType.PERSIST),
-        mappedBy = "custumer"
+        mappedBy = "Customer"
     )
     var credits: List<Credit> = mutableListOf()
 )
