@@ -4,7 +4,7 @@ import me.gbank.creditapp.entity.Customer
 
 interface ICustomerService {
 
-    fun save(Customer: Customer): String
+    fun save(Customer: Customer): Customer
 
     fun findById(id: Long): Customer
 

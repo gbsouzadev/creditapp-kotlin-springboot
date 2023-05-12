@@ -9,20 +9,12 @@ import java.lang.RuntimeException
 @Service
 class CustomerService(private val CustomerRepository: CustomerRepository) : ICustomerService {
 
-    override fun save(Customer: Customer): String {
-        this.CustomerRepository.save(Customer)
-        return "Customer successfully save"
-    }
-
+    override fun save(Customer: Customer): Customer = this.CustomerRepository.save(Customer)
 
     override fun findById(id: Long): Customer = this.CustomerRepository.findById(id).orElseThrow {
         throw RuntimeException("Id $id not found")
     }
 
-
-    override fun delete(id: Long) {
-        TODO("Not yet implemented")
-    }
-
+    override fun delete(id: Long) = this.CustomerRepository.deleteById(id)
 
 }
