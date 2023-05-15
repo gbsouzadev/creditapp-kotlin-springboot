@@ -1,5 +1,6 @@
 package me.gbank.creditapp.controller
 
+import jakarta.validation.Valid
 import me.gbank.creditapp.dto.CreditDto
 import me.gbank.creditapp.dto.CreditView
 import me.gbank.creditapp.dto.CreditViewList
@@ -24,10 +25,10 @@ import java.util.stream.Collectors
 class CreditResource(private val creditService: CreditService) {
 
     @PostMapping
-    fun saveCredit(@RequestBody creditDto: CreditDto): ResponseEntity<String> {
+    fun saveCredit(@RequestBody @Valid creditDto: CreditDto): ResponseEntity<String> {
         val credit: Credit = this.creditService.save(creditDto.toEntity())
         return ResponseEntity.status(HttpStatus.CREATED)
-            .body("Credit ${credit.creditCode} - Customer ${credit.customer?.firstName} saved")
+            .body("Credit ${credit.creditCode} - Customer ${credit.customer?.email} saved")
     }
 
     @GetMapping

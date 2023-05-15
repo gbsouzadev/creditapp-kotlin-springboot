@@ -1,5 +1,6 @@
 package me.gbank.creditapp.controller
 
+import jakarta.validation.Valid
 import me.gbank.creditapp.dto.CustomerDto
 import me.gbank.creditapp.dto.CustomerView
 import me.gbank.creditapp.dto.CustumerUpdateDto
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -21,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController
 class CustomerResource(private val customerService: CustomerService) {
 
     @PostMapping
-    fun savedCustomer(@RequestBody customerDto: CustomerDto): ResponseEntity<String> {
+    fun savedCustomer(@RequestBody @Valid customerDto: CustomerDto): ResponseEntity<String> {
         val savedCustomer = this.customerService.save(customerDto.toEntity())
         return ResponseEntity.status(HttpStatus.CREATED).body("Custumer ${savedCustomer.email} saved!")
     }
@@ -33,12 +35,13 @@ class CustomerResource(private val customerService: CustomerService) {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Long) = customerService.delete(id)
 
     @PatchMapping
     fun updateCustomer(
         @RequestParam(value = "customerId") id: Long,
-        @RequestBody customerUpdateDto: CustumerUpdateDto
+        @RequestBody @Valid customerUpdateDto: CustumerUpdateDto
     ): ResponseEntity<CustomerView> {
         val customer = this.customerService.findById(id)
         val costumerToUpdate = customerUpdateDto.toEntity(customer)
