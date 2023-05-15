@@ -12,7 +12,7 @@ class CustomerService(private val CustomerRepository: CustomerRepository) : ICus
     override fun save(Customer: Customer): Customer = this.CustomerRepository.save(Customer)
 
     override fun findById(id: Long): Customer = this.CustomerRepository.findById(id).orElseThrow {
-        throw RuntimeException("Id $id not found")
+        throw BusinessException("Id $id not found")
     }
 
     override fun delete(id: Long) = this.CustomerRepository.deleteById(id)
