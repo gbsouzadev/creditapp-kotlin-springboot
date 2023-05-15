@@ -8,8 +8,8 @@ data class CustomerDto(
     val firstName: String,
     val lastName: String,
     val cpf: String,
-    val income: BigDecimal,
     val email: String,
+    val income: BigDecimal,
     val password: String,
     val zipCode: String,
     val street: String
